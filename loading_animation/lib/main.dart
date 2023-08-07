@@ -115,10 +115,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () async {
                       // _timer?.cancel();
                       await EasyLoading.show(
+                        dismissOnTap: true,
                         status: 'loading...',
                         maskType: EasyLoadingMaskType.black,
                       );
-                      await EasyLoading.dismiss();
+                      // await EasyLoading.dismiss();
                       print('EasyLoading show');
                     },
                   ),
@@ -303,122 +304,121 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 20.0,
-                  bottom: 50.0,
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Text('IndicatorType(total: 23)'),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0),
-                      child: CupertinoSegmentedControl<EasyLoadingIndicatorType>(
-                        selectedColor: Colors.blue,
-                        children: {
-                          EasyLoadingIndicatorType.fadingCircle: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text('  fadingCircle,'),
-                          ),
-                          EasyLoadingIndicatorType.circle: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text('  circle,'),
-                          ),
-                          EasyLoadingIndicatorType.threeBounce: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text('  threeBounce,'),
-                          ),
-                          EasyLoadingIndicatorType.chasingDots: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text('  chasingDots,'),
-                          ),
-                          EasyLoadingIndicatorType.wave: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text('  wave,'),
-                          ),
-                          // EasyLoadingIndicatorType.wanderingCubes: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  wanderingCubes,'),
-                          // ),
-                          // EasyLoadingIndicatorType.rotatingPlain: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  rotatingPlain,'),
-                          // ),
-                          // EasyLoadingIndicatorType.doubleBounce: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  doubleBounce,'),
-                          // ),
-                          // EasyLoadingIndicatorType.fadingFour: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  fadingFour,'),
-                          // ),
-                          // EasyLoadingIndicatorType.fadingCube: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  fadingCube,'),
-                          // ),
-                          // EasyLoadingIndicatorType.pulse: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  pulse,'),
-                          // ),
-                          // EasyLoadingIndicatorType.cubeGrid: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  cubeGrid,'),
-                          // ),
-                          // EasyLoadingIndicatorType.rotatingCircle: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  rotatingCircle,'),
-                          // ),
-                          // EasyLoadingIndicatorType.foldingCube: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  foldingCube,'),
-                          // ),
-                          // EasyLoadingIndicatorType.pumpingHeart: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  pumpingHeart,'),
-                          // ),
-                          // EasyLoadingIndicatorType.dualRing: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  dualRing,'),
-                          // ),
-                          // EasyLoadingIndicatorType.hourGlass: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  hourGlass,'),
-                          // ),
-                          // EasyLoadingIndicatorType.pouringHourGlass: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  pouringHourGlass,'),
-                          // ),
-                          // EasyLoadingIndicatorType.fadingGrid: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  fadingGrid,'),
-                          // ),
-                          // EasyLoadingIndicatorType.ring: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  ring,'),
-                          // ),
-                          // EasyLoadingIndicatorType.ripple: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  ripple,'),
-                          // ),
-                          // EasyLoadingIndicatorType.spinningCircle: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  spinningCircle,'),
-                          // ),
-                          // EasyLoadingIndicatorType.squareCircle: Padding(
-                          //   padding: EdgeInsets.all(5.0),
-                          //   child: Text('  squareCircle,'),
-                          // ),
-                        },
-                        onValueChanged: (value) {
-                          EasyLoading.instance.indicatorType = value;
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              IndicatorSelection()
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class IndicatorSelection extends StatelessWidget {
+  final List<String> indicatorLabels = [
+    'fadingCircle',
+    'circle',
+    'threeBounce',
+    'chasingDots',
+    'wave',
+    'wanderingCubes',
+    'rotatingPlain',
+    'doubleBounce',
+    'fadingFour',
+    'fadingCube',
+    'pulse',
+    'cubeGrid',
+    'rotatingCircle',
+    'foldingCube',
+    'pumpingHeart',
+    'dualRing',
+    'hourGlass',
+    'pouringHourGlass',
+    'fadingGrid',
+    'ring',
+    'ripple',
+    'spinningCircle',
+    'squareCircle',
+  ];
+  final List<EasyLoadingIndicatorType> indicators = [
+    EasyLoadingIndicatorType.fadingCircle,
+    EasyLoadingIndicatorType.circle,
+    EasyLoadingIndicatorType.threeBounce,
+    EasyLoadingIndicatorType.chasingDots,
+    EasyLoadingIndicatorType.wave,
+    EasyLoadingIndicatorType.wanderingCubes,
+    EasyLoadingIndicatorType.rotatingPlain,
+    EasyLoadingIndicatorType.doubleBounce,
+    EasyLoadingIndicatorType.fadingFour,
+    EasyLoadingIndicatorType.fadingCube,
+    EasyLoadingIndicatorType.pulse,
+    EasyLoadingIndicatorType.cubeGrid,
+    EasyLoadingIndicatorType.rotatingCircle,
+    EasyLoadingIndicatorType.foldingCube,
+    EasyLoadingIndicatorType.pumpingHeart,
+    EasyLoadingIndicatorType.dualRing,
+    EasyLoadingIndicatorType.hourGlass,
+    EasyLoadingIndicatorType.pouringHourGlass,
+    EasyLoadingIndicatorType.fadingGrid,
+    EasyLoadingIndicatorType.ring,
+    EasyLoadingIndicatorType.ripple,
+    EasyLoadingIndicatorType.spinningCircle,
+    EasyLoadingIndicatorType.squareCircle,
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.0),
+      child: Column(
+        children: <Widget>[
+          Text('IndicatorType(total: 23)'),
+          IndicatorSegment(
+            indicators: indicators,
+            indicatoesLabels: indicatorLabels,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class IndicatorSegment extends StatelessWidget {
+  final List indicators;
+  final List indicatoesLabels;
+
+  IndicatorSegment({required this.indicators, required this.indicatoesLabels});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: SizedBox(
+        height: 300,
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // Number of columns in the grid
+            crossAxisSpacing: 8.0, // Spacing between columns
+            mainAxisSpacing: 8.0, // Spacing between rows
+            childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 8),
+          ),
+          itemCount: indicatoesLabels.length,
+          itemBuilder: (context, index) {
+            return ElevatedButton(
+              onPressed: () async {
+                EasyLoading.instance.indicatorType = indicators[index];
+                await EasyLoading.show(
+                  dismissOnTap: true,
+                  status: 'loading...',
+                  maskType: EasyLoadingMaskType.black,
+                );
+              },
+              child: Center(
+                child: Text(
+                  indicatoesLabels[index],
+                  style: TextStyle(fontSize: 15.0),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
