@@ -14,5 +14,16 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-![plot](./assests_log_in.jpg)
-![plot](./assests_sign_up.jpg)
+<br/>
+<img
+  src="./assests_log_in.jpg"
+  alt="Alt text"
+  title="Optional title"
+  width=300px
+  style="display: inline-block; margin: 0 auto; max-width: 300px">
+<img
+  src="././assest_sign_up.jpg"
+  alt="Alt text"
+  title="Optional title"
+  width=300px
+  style="display: inline-block; margin: 0 auto; max-width: 300px">
