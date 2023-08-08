@@ -1,16 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constant.dart';
 
 class ThemeProvider with ChangeNotifier {
-  Future<void> getSavedPreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    final themeIndex = prefs.getInt('themeMode') ?? 0; // Default theme name
-    final savedPrimaryColorIndex = prefs.getInt('primaryColor') ?? 0; // Default theme name
-    notifyListeners();
-  }
-
   ThemeMode selectedThemeMode = appThemes[0].mode;
   Color selectedPrimaryColor = AppColors.primaryColors[0];
 
@@ -28,17 +22,17 @@ class ThemeProvider with ChangeNotifier {
     setSelectedPrimaryColor(savedPrimaryColor);
   }
 
-  setSelectedThemeMode(ThemeMode _themeMode) async {
-    selectedThemeMode = _themeMode;
+  setSelectedThemeMode(ThemeMode themeMode) async {
+    selectedThemeMode = themeMode;
     notifyListeners();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('themeMode', _themeMode.index);
+    prefs.setInt('themeMode', themeMode.index);
   }
 
-  setSelectedPrimaryColor(Color _color) async {
-    selectedPrimaryColor = _color;
+  setSelectedPrimaryColor(Color color) async {
+    selectedPrimaryColor = color;
     notifyListeners();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('primaryColor', _color.value);
+    prefs.setInt('primaryColor', color.value);
   }
 }

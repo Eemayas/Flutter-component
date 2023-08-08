@@ -86,92 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               TextField(),
-              Wrap(
-                runAlignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: <Widget>[
-                  TextButton(
-                    child: Text('open test page'),
-                    onPressed: () {
-                      _timer?.cancel();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => TestPage(),
-                        ),
-                      );
-                    },
-                  ),
-                  TextButton(
-                    child: Text('dismiss'),
-                    onPressed: () async {
-                      _timer?.cancel();
-                      await EasyLoading.dismiss();
-                      print('EasyLoading dismiss');
-                    },
-                  ),
-                  TextButton(
-                    child: Text('show'),
-                    onPressed: () async {
-                      // _timer?.cancel();
-                      await EasyLoading.show(
-                        dismissOnTap: true,
-                        status: 'loading...',
-                        maskType: EasyLoadingMaskType.black,
-                      );
-                      // await EasyLoading.dismiss();
-                      print('EasyLoading show');
-                    },
-                  ),
-                  TextButton(
-                    child: Text('showToast'),
-                    onPressed: () {
-                      _timer?.cancel();
-                      EasyLoading.showToast(
-                        'Toast',
-                      );
-                    },
-                  ),
-                  TextButton(
-                    child: Text('showSuccess'),
-                    onPressed: () async {
-                      _timer?.cancel();
-                      await EasyLoading.showSuccess('Great Success!');
-                      print('EasyLoading showSuccess');
-                    },
-                  ),
-                  TextButton(
-                    child: Text('showError'),
-                    onPressed: () {
-                      _timer?.cancel();
-                      EasyLoading.showError('Failed with Error');
-                    },
-                  ),
-                  TextButton(
-                    child: Text('showInfo'),
-                    onPressed: () {
-                      _timer?.cancel();
-                      EasyLoading.showInfo('Useful Information.');
-                    },
-                  ),
-                  TextButton(
-                    child: Text('showProgress'),
-                    onPressed: () {
-                      _progress = 0;
-                      _timer?.cancel();
-                      _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
-                        EasyLoading.showProgress(_progress, status: '${(_progress * 100).toStringAsFixed(0)}%');
-                        _progress += 0.03;
-
-                        if (_progress >= 1) {
-                          _timer?.cancel();
-                          EasyLoading.dismiss();
-                        }
-                      });
-                    },
-                  ),
-                ],
-              ),
               Padding(
                 padding: EdgeInsets.only(top: 20.0),
                 child: Column(
@@ -304,6 +218,92 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
+              Wrap(
+                runAlignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: <Widget>[
+                  ElevatedButton(
+                    child: Text('Open test page'),
+                    onPressed: () {
+                      _timer?.cancel();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => TestPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('dismiss'),
+                    onPressed: () async {
+                      _timer?.cancel();
+                      await EasyLoading.dismiss();
+                      print('EasyLoading dismiss');
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('show'),
+                    onPressed: () async {
+                      // _timer?.cancel();
+                      await EasyLoading.show(
+                        dismissOnTap: true,
+                        status: 'loading...',
+                        maskType: EasyLoadingMaskType.black,
+                      );
+                      // await EasyLoading.dismiss();
+                      print('EasyLoading show');
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('showToast'),
+                    onPressed: () {
+                      _timer?.cancel();
+                      EasyLoading.showToast(
+                        'Toast',
+                      );
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('showSuccess'),
+                    onPressed: () async {
+                      _timer?.cancel();
+                      await EasyLoading.showSuccess('Great Success!');
+                      print('EasyLoading showSuccess');
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('showError'),
+                    onPressed: () {
+                      _timer?.cancel();
+                      EasyLoading.showError('Failed with Error');
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('showInfo'),
+                    onPressed: () {
+                      _timer?.cancel();
+                      EasyLoading.showInfo('Useful Information.');
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('showProgress'),
+                    onPressed: () {
+                      _progress = 0;
+                      _timer?.cancel();
+                      _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+                        EasyLoading.showProgress(_progress, status: '${(_progress * 100).toStringAsFixed(0)}%');
+                        _progress += 0.03;
+
+                        if (_progress >= 1) {
+                          _timer?.cancel();
+                          EasyLoading.dismiss();
+                        }
+                      });
+                    },
+                  ),
+                ],
+              ),
               IndicatorSelection()
             ],
           ),
@@ -313,6 +313,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class IndicatorSelection extends StatelessWidget {
   final List<String> indicatorLabels = [
     'fadingCircle',
@@ -385,7 +386,7 @@ class IndicatorSegment extends StatelessWidget {
   final List indicators;
   final List indicatoesLabels;
 
-  IndicatorSegment({required this.indicators, required this.indicatoesLabels});
+  const IndicatorSegment({super.key, required this.indicators, required this.indicatoesLabels});
 
   @override
   Widget build(BuildContext context) {
@@ -471,7 +472,7 @@ class _TestPageState extends State<TestPage> {
         title: Text('Test Page'),
       ),
       body: Center(
-        child: TextButton(
+        child: ElevatedButton(
           child: Text('loadData'),
           onPressed: () {
             EasyLoading.show(status: '加载中...');
